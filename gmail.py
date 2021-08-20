@@ -52,17 +52,3 @@ class Gmail:
     def close_gmail(self):
         self.smtp.close()
 
-
-
-# amir = Gmail(EMAIL_ADDRESS,EMAIL_PASSWORD)
-# prof = 'amir'
-# paper = 'control'
-# txt = f'''
-# <p><span style="font-family: Verdana, Geneva, sans-serif;">Hi professor {prof}</span></p>
-# <p><span style="font-family: Verdana, Geneva, sans-serif;">This is amir</span></p>
-# <p><span style="font-family: Verdana, Geneva, sans-serif;">I love your paper about {paper}</span></p>
-# '''
-# from templates import Templates
-# mytemp = Templates()
-# txt = mytemp.get(1,'Asghar', 'Robotics', 'Agile')
-# amir.send_email(EMAIL_ADDRESS,EMAIL_ADDRESS, 'HELLO', txt, 'CV.pdf')
