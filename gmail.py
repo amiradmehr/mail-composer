@@ -7,8 +7,6 @@ from helper import *
 from time import sleep
 load_dotenv()
 
-EMAIL_ADDRESS = os.getenv('EMAIL')
-EMAIL_PASSWORD = os.getenv('PASSWORD')
 
 
 
@@ -22,13 +20,13 @@ class Gmail:
 
             try:
                 self.smtp = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-                self.smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-                print("Connected successfully")
+                self.smtp.login(self.email_address, self.password)
+                print("Connected to GMAIL successfully")
                 break
             except:
-                print("\nFaild to connect")
+                print("\nFaild to connect to GMAIL")
                 for i in range(6):
-                    sleep(.3)
+                    sleep(.5)
                     progressBar(i,5)
 
     def send_email(self, reciever, sender, subject, txt, file):
@@ -36,7 +34,7 @@ class Gmail:
         msg['Subject'] = subject
         msg['From'] = sender
         msg['To'] = reciever
-        msg.add_alternative(f""" {txt} """, subtype = 'html')
+        msg.add_alternative(f'{txt}', subtype = 'html')
         
         with open(file, 'rb') as f:
             file_data = f.read()
@@ -45,7 +43,7 @@ class Gmail:
 
         try:
             self.smtp.send_message(msg)
-            print(f"✅Email sent to {reciever}")
+            print(f"✅ Email sent to {reciever}")
             return True
         except:
             print(f"❌ Failed to send email to {reciever}")
@@ -56,8 +54,15 @@ class Gmail:
 
 
 
-if __name__ == '__main__':
-
-    amir = Gmail(EMAIL_ADDRESS,EMAIL_PASSWORD)
-    txt = "<p>This is in HTML <strong>message</strong></p> <p>also this is next line</p>"
-    amir.send_email(EMAIL_ADDRESS,EMAIL_ADDRESS, 'HELLO', txt, 'CV.pdf')
+# amir = Gmail(EMAIL_ADDRESS,EMAIL_PASSWORD)
+# prof = 'amir'
+# paper = 'control'
+# txt = f'''
+# <p><span style="font-family: Verdana, Geneva, sans-serif;">Hi professor {prof}</span></p>
+# <p><span style="font-family: Verdana, Geneva, sans-serif;">This is amir</span></p>
+# <p><span style="font-family: Verdana, Geneva, sans-serif;">I love your paper about {paper}</span></p>
+# '''
+# from templates import Templates
+# mytemp = Templates()
+# txt = mytemp.get(1,'Asghar', 'Robotics', 'Agile')
+# amir.send_email(EMAIL_ADDRESS,EMAIL_ADDRESS, 'HELLO', txt, 'CV.pdf')
