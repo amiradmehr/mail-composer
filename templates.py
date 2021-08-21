@@ -1,6 +1,3 @@
-
-
-
 from helper import progressBar
 
 
