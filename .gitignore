@@ -6,3 +6,6 @@ garbage.py
 __pycache__
 credentials.json
 .vscode
+images
+temp.md
+hello

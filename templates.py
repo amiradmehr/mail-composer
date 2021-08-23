@@ -8,7 +8,7 @@ class Templates:
             self.num = num
             
 
-        def get(self, prof, topic, paper):
+        def get(self, prof, topic, paper, arb1=None, arb2=None, arb3=None):
                 self.temp1 = f'''
 
 <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:8pt;"><span style="font-size: 11pt; font-family: Verdana, Geneva, sans-serif; color: rgb(0, 0, 0); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Dear Dr. {prof},</span></p>
