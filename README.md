@@ -62,14 +62,12 @@ This is an example of how to list things you need to use the software and how to
 4. click on the **serive account** that you just create and click on **KEY** section at the top of the page and create a JSON key. Then copy the `json` file in the directory and rename it to `credentials.json`.
 
   <p align="center">
-    <img src="docs/services.png" alt="services" width="70%" height="70%">
-    <img src="docs/jasonkey.png" alt="Logo" width="50%" height="50%">
+    <img src="docs/services.png" alt="services" width="50%" height="50%">
+    <img src="docs/jasonkey.png" alt="Logo" width="30%" height="30%">
   </p>
 
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+
+
 
 
 ### Installation
@@ -85,7 +83,7 @@ This is an example of how to list things you need to use the software and how to
 3. Create a `.env` file in the directory then copy and assign these variables
    
    
-  ```JS
+  ```sh
     EMAIL = youremail
     PASSWORD = your bot passwors
     CREDENTIALS = credentials.json
