@@ -7,6 +7,7 @@ import os
 from dotenv import load_dotenv
 import schedule
 import getopt, sys
+from helper import progressBar
 load_dotenv()
 
 EMAIL_ADDRESS = os.getenv('EMAIL')
@@ -37,7 +38,9 @@ def compose(ws_name, num = 20):
         topic = recievers.iloc[i]['Topic']
         paper = recievers.iloc[i]['Paper']
         subject = 'Looking for position'
-        text = Templates(1).get(professor,topic,paper)
+        template_number = int(recievers.iloc[i]['Template'])
+
+        text = Templates(template_number).get(professor,topic,paper)
 
         mygmail.send_email(to,EMAIL_ADDRESS,subject,text, file=CV)
 
@@ -58,8 +61,8 @@ if __name__ == '__main__':
 
     argumentList = sys.argv[1:]
     
-    options = "c:w:n:"
-    long_options = ["Clock=", "Workbook=", "Num="]
+    options = "c:w:n:t"
+    long_options = ["Clock=", "Workbook=", "Num=","Test"]
     
     try:
         arguments, values = getopt.getopt(argumentList, options, long_options)
@@ -74,19 +77,31 @@ if __name__ == '__main__':
                 
             elif currentArgument in ("-n", "--Num"):
                 num = int(currentValue)
+
+            elif currentArgument in ("-t", "--Test"):
+                print("test mdoe:")
+                for i in range(10):
+                    sleep(1)
+                    progressBar(i,10)
+
+                compose(WORKBOOK_NAME,num)
                 
     except getopt.error as err:
         print (str(err))
 
+    try:
+        schedule.every().monday.at(clock).do(compose, WORKBOOK_NAME, num)
+        schedule.every().tuesday.at(clock).do(compose, WORKBOOK_NAME, num)
+        schedule.every().wednesday.at(clock).do(compose, WORKBOOK_NAME, num)
+        schedule.every().thursday.at(clock).do(compose, WORKBOOK_NAME, num)
+        schedule.every().friday.at(clock).do(compose, WORKBOOK_NAME, num)
+        print(f"Scheduled at {clock}")
+        while True:
+            schedule.run_pending()
+            sleep(1)
+            
+    except NameError:
+        print("Enter all arguments correctly")
+    
 
-    schedule.every().monday.at(clock).do(compose, WORKBOOK_NAME, num)
-    schedule.every().tuesday.at(clock).do(compose, WORKBOOK_NAME, num)
-    schedule.every().wednesday.at(clock).do(compose, WORKBOOK_NAME, num)
-    schedule.every().thursday.at(clock).do(compose, WORKBOOK_NAME, num)
-    schedule.every().friday.at(clock).do(compose, WORKBOOK_NAME, num)
-
-    print(f"Scheduled at {clock}")
-
-    while True:
-        schedule.run_pending()
-        sleep(1)
+    
