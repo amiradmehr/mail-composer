@@ -40,7 +40,7 @@ def compose(ws_name, num = 20):
         subject = 'Looking for position'
         template_number = int(recievers.iloc[i]['Template'])
 
-        text = Templates(template_number).get(professor,topic,paper)
+        text = Templates(template_number).get(prof=professor,topic=topic,paper=paper)
 
         mygmail.send_email(to,EMAIL_ADDRESS,subject,text, file=CV)
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         while True:
             schedule.run_pending()
             sleep(1)
-            
+
     except NameError:
         print("Enter all arguments correctly")
     
